@@ -1,0 +1,10 @@
+const express=require('express');
+const airplaneRouter=express.Router();
+const {AirplaneMiddlewares}=require('../../middlewares');
+const {AirplaneController}=require('../../controllers');
+airplaneRouter.post('/',AirplaneMiddlewares.validateCreateRequest,AirplaneController.createAirplane);
+airplaneRouter.get('/',AirplaneController.getAirplanes);
+airplaneRouter.get('/:id',AirplaneController.getAirplane);
+airplaneRouter.delete('/:id',AirplaneController.destroyAirplane);
+airplaneRouter.patch('/:id',AirplaneController.updateAirplane);
+module.exports=airplaneRouter;
