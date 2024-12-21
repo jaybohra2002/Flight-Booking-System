@@ -85,7 +85,7 @@ async function destroyAirplane(req, res) {
                 .json(errors);
     }
 }
-async function updateAirplane(req,res){
+async function updateAirplane(req,res,next){
     try {
         
         const response=await AirplaneService.updateAirplane(req.params.id,req.body);
@@ -95,10 +95,13 @@ async function updateAirplane(req,res){
             .status(StatusCodes.OK)
             .json(success);
     } catch (error) {
+        
+        console.log(error);
         errors.error=error;
         return res
-                .status(error.status || StatusCodes.INTERNAL_SERVER_ERROR)
+                .status(error.statusCode || StatusCodes.INTERNAL_SERVER_ERROR)
                 .json(errors);
+        // next(error);
     }
 }
 

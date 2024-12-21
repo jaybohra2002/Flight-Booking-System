@@ -45,8 +45,10 @@ class CrudRepository {
     }
 
     async getAllData() {
-           
+            console.log("###############");
             const response = await this.model.findAll();
+            console.log("Here Repo");
+            console.log(response);
             
             return response;
        

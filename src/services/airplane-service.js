@@ -59,12 +59,19 @@ async function destroyAirplane(id) {
 async function updateAirplane(id, data){
     try {
         const response=await airplaneRepository.updateData(id, data);
+        
+        if(response[0]===0){
+            
+            throw new AppError('The Airplane you requested to update is not present', StatusCodes.BAD_REQUEST);
+        }
         return response;
     } catch (error) {
-        if(error.statusCode=StatusCodes.NOT_FOUND){
-            throw new AppError('the airplane you requested to delete is notpresent'.error.statusCode);
-        }
-        throw new AppError('Cannot delete data of all the airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
+        console.log(error);
+        throw error;
+        // else{
+        //     throw new AppError('Cannot update data of the airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
+        // }
+        
     }
 }
  

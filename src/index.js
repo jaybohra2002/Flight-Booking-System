@@ -2,6 +2,7 @@ const express = require('express');
 
 const { ServerConfig } = require('./config');
 const apiRoutes = require('./routes');
+const errorHandler = require('./utils/errors/error-handler');
 
 
 const app = express();
@@ -12,7 +13,7 @@ app.use((req, res, next) => {
     next(); 
 });
 app.use('/api', apiRoutes);
-
+app.use(errorHandler);
 app.listen(ServerConfig.PORT, () => {
     console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`);
 });
